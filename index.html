@@ -1,173 +1,295 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>TATA PLAY FIBER – Offer Viewer</title>
+    <meta charset="UTF-8">
+    <title>TATA PLAY FIBER – Offer Viewer & AI Friend</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+        }
 
-<style>
-*{
-    box-sizing:border-box;
-    font-family: "Segoe UI", Arial;
-}
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #020617, #0f172a, #020617);
+            color: white;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-body{
-    margin:0;
-    min-height:100vh;
-    background:linear-gradient(135deg,#020617,#020617,#0f172a,#020617);
-    color:white;
-    padding:30px;
-}
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-size: 48px;
+            letter-spacing: 2px;
+            margin: 0;
+            background: linear-gradient(to right, #38bdf8, #22c55e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header p {
+            margin-top: 8px;
+            color: #94a3b8;
+            letter-spacing: 5px;
+            font-weight: bold;
+        }
 
-/* Header */
-.header{
-    text-align:center;
-    margin-bottom:30px;
-}
-.header h1{
-    font-size:42px;
-    letter-spacing:2px;
-    margin:0;
-    background:linear-gradient(to right,#38bdf8,#22c55e);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
-.header p{
-    margin-top:8px;
-    color:#94a3b8;
-    letter-spacing:4px;
-    font-weight:bold;
-}
+        /* Main Offer Section */
+        .container {
+            display: flex;
+            gap: 30px;
+            max-width: 1100px;
+            width: 100%;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
 
-/* Layout */
-.container{
-    display:flex;
-    gap:25px;
-    align-items:flex-start;
-}
+        /* Square Textarea Styling */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        textarea {
+            width: 350px; /* Exact Square */
+            height: 350px; /* Exact Square */
+            resize: none;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            outline: none;
+            padding: 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
 
-/* Glass textarea */
-textarea{
-    width:40%;
-    height:300px;
-    resize:none;
-    border:none;
-    outline:none;
-    padding:18px;
-    border-radius:16px;
-    font-size:14px;
-    color:white;
-    background:rgba(255,255,255,0.08);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow:0 0 30px rgba(56,189,248,0.15);
-}
+        button {
+            margin-top: 20px;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #38bdf8, #22c55e);
+            font-weight: bold;
+            color: #020617;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+        }
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+        }
 
-/* Button */
-button{
-    margin-top:15px;
-    padding:12px 22px;
-    border:none;
-    border-radius:10px;
-    background:linear-gradient(135deg,#38bdf8,#22c55e);
-    font-weight:bold;
-    color:#020617;
-    cursor:pointer;
-    transition:0.3s;
-}
-button:hover{
-    transform:scale(1.05);
-}
+        /* Table Section */
+        .table-box {
+            flex-grow: 1;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-height: 350px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            padding: 15px;
+            text-align: left;
+            border-radius: 8px;
+        }
+        td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
 
-/* Right side table */
-.table-box{
-    width:60%;
-    background:rgba(255,255,255,0.05);
-    backdrop-filter: blur(10px);
-    border-radius:16px;
-    padding:15px;
-    box-shadow:0 0 40px rgba(0,0,0,0.6);
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    overflow:hidden;
-    border-radius:12px;
-}
-th,td{
-    padding:14px;
-    text-align:center;
-}
-th{
-    background:rgba(56,189,248,0.2);
-    color:#38bdf8;
-    font-weight:bold;
-}
-tr:nth-child(even){
-    background:rgba(255,255,255,0.03);
-}
-tr:hover{
-    background:rgba(56,189,248,0.1);
-}
-</style>
+        /* --- AI Chat Friend Section --- */
+        .ai-section {
+            width: 100%;
+            max-width: 600px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 24px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #22c55e;
+        }
+        .chat-window {
+            height: 200px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .msg {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .user-msg {
+            align-self: flex-end;
+            background: #38bdf8;
+            color: #020617;
+            font-weight: 500;
+        }
+        .ai-msg {
+            align-self: flex-start;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input-area input {
+            flex-grow: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 10px;
+            color: white;
+            outline: none;
+        }
+    </style>
 </head>
-
 <body>
 
 <div class="header">
     <h1>TATA PLAY FIBER</h1>
-    <p>USE</p>
+    <p>DIGITAL PARTNER</p>
 </div>
 
 <div class="container">
-
-    <div>
-        <textarea id="input" placeholder="Paste offers here...
+    <div class="input-group">
+        <textarea id="input" placeholder="Paste data here...
 Example:
-200_6M with Mega : 300 cashback | 200_3M with Mega : 250 cashback"></textarea>
-
-        <br>
-        <button onclick="convert()">Show Offers</button>
+200_6M with Mega : 300 cashback | 500_12M with Mini : 1000 cashback"></textarea>
+        <button onclick="convert()">Update Offer Table</button>
     </div>
 
     <div class="table-box">
-        <table id="table"></table>
+        <table id="table">
+            <tr><td style="color:#94a3b8; text-align:center; padding-top:100px;">Enter offer data to populate the table</td></tr>
+        </table>
+    </div>
+</div>
+
+<div class="ai-section">
+    <div class="chat-header">
+        <div class="status-dot"></div>
+        <strong style="color: #38bdf8;">Fiber Assistant</strong>
+    </div>
+    
+    <div class="chat-window" id="chatWindow">
+        <div class="msg ai-msg">Hello! I'm your Fiber Assistant. Need help understanding these plans?</div>
     </div>
 
+    <div class="chat-input-area">
+        <input type="text" id="chatInput" placeholder="Ask me something..." onkeypress="if(event.key === 'Enter') sendMessage()">
+        <button onclick="sendMessage()" style="margin:0; padding: 10px 20px;">Send</button>
+    </div>
 </div>
 
 <script>
+// Function to convert text to table
 function convert(){
     let text = document.getElementById("input").value.trim();
+    if(!text) return;
+    
     let lines = text.split("|");
-
-    let html = "<tr><th>Speed</th><th>Validity</th><th>OTT</th><th>Cashback</th></tr>";
+    let html = "<tr><th>Speed</th><th>Validity</th><th>OTT Plan</th><th>Cashback</th></tr>";
 
     lines.forEach(line=>{
         line = line.trim();
         if(!line) return;
 
-        let parts = line.split(" ");
+        try {
+            let parts = line.split(" ");
+            let sp = parts[0].split("_");
+            let speed = sp[0] + " Mbps";
+            let validity = sp[1] ? sp[1].replace("M"," Months") : "N/A";
+            let ott = parts[2] || "Standard";
+            let cashback = parts[4] || "0";
 
-        // 200_6M
-        let sp = parts[0].split("_");
-        let speed = sp[0] + " Mbps";
-        let validity = sp[1].replace("M"," Months");
-
-        // OTT
-        let ott = (parts[2] === "no") ? "No OTT" : parts[2];
-
-        // Cashback
-        let cashback = parts[4];
-
-        html += `<tr>
-                    <td>${speed}</td>
-                    <td>${validity}</td>
-                    <td>${ott}</td>
-                    <td>₹${cashback}</td>
-                </tr>`;
+            html += `<tr>
+                        <td><strong>${speed}</strong></td>
+                        <td>${validity}</td>
+                        <td>${ott}</td>
+                        <td style="color:#22c55e; font-weight:bold;">₹${cashback}</td>
+                    </tr>`;
+        } catch(e) {
+            console.error("Format error in line:", line);
+        }
     });
 
     document.getElementById("table").innerHTML = html;
+}
+
+// Function for AI Friend Chat
+function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const window = document.getElementById('chatWindow');
+    const msg = input.value.trim();
+
+    if (msg === "") return;
+
+    // Add User Message
+    window.innerHTML += `<div class="msg user-msg">${msg}</div>`;
+    input.value = "";
+
+    // Auto-scroll
+    window.scrollTop = window.scrollHeight;
+
+    // AI "Thinking" and Response
+    setTimeout(() => {
+        let response = "";
+        const lowerMsg = msg.toLowerCase();
+
+        if (lowerMsg.includes("hello") || lowerMsg.includes("hi")) {
+            response = "Hey there! I'm ready to help you with Tata Play Fiber details.";
+        } else if (lowerMsg.includes("best plan")) {
+            response = "The 200 Mbps 6-month plan is currently our most popular choice!";
+        } else if (lowerMsg.includes("cashback")) {
+            response = "Check the green values in your table for the current cashback offers.";
+        } else {
+            response = "That's interesting! I'm still learning, but I can tell you that Tata Play Fiber offers great speeds.";
+        }
+
+        window.innerHTML += `<div class="msg ai-msg">${response}</div>`;
+        window.scrollTop = window.scrollHeight;
+    }, 600);
 }
 </script>
 
