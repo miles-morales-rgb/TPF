@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TATA PLAY FIBER – Offer Viewer</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    font-family: "Segoe UI", Arial;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    background:linear-gradient(135deg,#020617,#020617,#0f172a,#020617);
+    color:white;
+    padding:30px;
+}
+
+/* Header */
+.header{
+    text-align:center;
+    margin-bottom:30px;
+}
+.header h1{
+    font-size:42px;
+    letter-spacing:2px;
+    margin:0;
+    background:linear-gradient(to right,#38bdf8,#22c55e);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+.header p{
+    margin-top:8px;
+    color:#94a3b8;
+    letter-spacing:4px;
+    font-weight:bold;
+}
+
+/* Layout */
+.container{
+    display:flex;
+    gap:25px;
+    align-items:flex-start;
+}
+
+/* Glass textarea */
+textarea{
+    width:40%;
+    height:300px;
+    resize:none;
+    border:none;
+    outline:none;
+    padding:18px;
+    border-radius:16px;
+    font-size:14px;
+    color:white;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow:0 0 30px rgba(56,189,248,0.15);
+}
+
+/* Button */
+button{
+    margin-top:15px;
+    padding:12px 22px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(135deg,#38bdf8,#22c55e);
+    font-weight:bold;
+    color:#020617;
+    cursor:pointer;
+    transition:0.3s;
+}
+button:hover{
+    transform:scale(1.05);
+}
+
+/* Right side table */
+.table-box{
+    width:60%;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    border-radius:16px;
+    padding:15px;
+    box-shadow:0 0 40px rgba(0,0,0,0.6);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    overflow:hidden;
+    border-radius:12px;
+}
+th,td{
+    padding:14px;
+    text-align:center;
+}
+th{
+    background:rgba(56,189,248,0.2);
+    color:#38bdf8;
+    font-weight:bold;
+}
+tr:nth-child(even){
+    background:rgba(255,255,255,0.03);
+}
+tr:hover{
+    background:rgba(56,189,248,0.1);
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>TATA PLAY FIBER</h1>
+    <p>USE</p>
+</div>
+
+<div class="container">
+
+    <div>
+        <textarea id="input" placeholder="Paste offers here...
+Example:
+200_6M with Mega : 300 cashback | 200_3M with Mega : 250 cashback"></textarea>
+
+        <br>
+        <button onclick="convert()">Show Offers</button>
+    </div>
+
+    <div class="table-box">
+        <table id="table"></table>
+    </div>
+
+</div>
+
+<script>
+function convert(){
+    let text = document.getElementById("input").value.trim();
+    let lines = text.split("|");
+
+    let html = "<tr><th>Speed</th><th>Validity</th><th>OTT</th><th>Cashback</th></tr>";
+
+    lines.forEach(line=>{
+        line = line.trim();
+        if(!line) return;
+
+        let parts = line.split(" ");
+
+        // 200_6M
+        let sp = parts[0].split("_");
+        let speed = sp[0] + " Mbps";
+        let validity = sp[1].replace("M"," Months");
+
+        // OTT
+        let ott = (parts[2] === "no") ? "No OTT" : parts[2];
+
+        // Cashback
+        let cashback = parts[4];
+
+        html += `<tr>
+                    <td>${speed}</td>
+                    <td>${validity}</td>
+                    <td>${ott}</td>
+                    <td>₹${cashback}</td>
+                </tr>`;
+    });
+
+    document.getElementById("table").innerHTML = html;
+}
+</script>
+
+</body>
+</html>
